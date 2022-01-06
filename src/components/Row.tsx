@@ -42,7 +42,7 @@ export const Row = ({ title, fetchUrl, isLargeRow }: Props) => {
     fetchData()
   }, [fetchUrl])
 
-  console.log(movies)
+  // console.log(movies)
 
   const opts: Options = {
     height: '390',
@@ -67,16 +67,19 @@ export const Row = ({ title, fetchUrl, isLargeRow }: Props) => {
       <h2>{title}</h2>
       <div className="Row-posters">
         {/* ポスターコンテンツ */}
-        {movies.map((movie, i) => (
-          <img
-            key={movie.id}
-            className={`Row-poster ${isLargeRow && 'Row-poster-large'}`}
-            src={`${base_url}${
-              isLargeRow ? movie.poster_path : movie.backdrop_path
-            }`}
-            alt={movie.name}
-            onClick={() => handleClick(movie)}
-          />
+        {movies.map((movie) => (
+          <div>
+            <p>{movie.original_name}</p>
+            <img
+              key={movie.id}
+              className={`Row-poster ${isLargeRow && 'Row-poster-large'}`}
+              src={`${base_url}${
+                isLargeRow ? movie.poster_path : movie.backdrop_path
+              }`}
+              alt={movie.name}
+              onClick={() => handleClick(movie)}
+            />
+          </div>
         ))}
       </div>
       {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}

@@ -16,7 +16,7 @@ export const Banner = () => {
   useEffect(() => {
     async function fetchData() {
       const request = await axios.get(requests.feachNetflixOriginals)
-      console.log(request.data.result)
+      // console.log(request.data.result)
 
       //apiからランダムで値を取得している
       setMovie(
@@ -28,7 +28,7 @@ export const Banner = () => {
     }
     fetchData()
   }, [])
-  console.log(movie)
+  // console.log(movie)
 
   // descriptionの切り捨てよう関数
   function truncate(str: any, n: number) {
@@ -36,6 +36,10 @@ export const Banner = () => {
     if (str !== undefined) {
       return str.length > n ? str?.substr(0, n - 1) + '...' : str
     }
+  }
+
+  const handleNetflix = () => {
+    return window.open('https://www.netflix.com/jp/', '_blank')
   }
 
   return (
@@ -52,8 +56,12 @@ export const Banner = () => {
           {movie?.title || movie?.name || movie?.orignal_name}
         </h1>
         <div className="Banner-buttons">
-          <button className="Banner-button">Play</button>
-          <button className="Banner-button">My List</button>
+          <button className="Banner-button" onClick={() => handleNetflix()}>
+            Play
+          </button>
+          <button className="Banner-button" onClick={() => handleNetflix()}>
+            My List
+          </button>
         </div>
 
         <h1 className="Banner-description">{truncate(movie?.overview, 150)}</h1>
